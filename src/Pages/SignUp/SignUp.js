@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 const SignUp = () => {
     const { createUser } = useContext(AuthContext)
     const handleSignUp = (event) => {
@@ -12,10 +14,10 @@ const SignUp = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
+                toast.success('Your Register succesfully')
                 console.log(user)
             })
             .then(err => { console.log(err) })
-
     }
     return (
         <div className="hero w-full my-20">
@@ -50,6 +52,12 @@ const SignUp = () => {
 
                         </div>
                     </form>
+                    <p className='text-center'>Or SignUp With</p>
+                    <div className='d-flex text-center'>
+                        <button className='mr-3'><span><FaFacebook /></span></button>
+                        <button className='mr-3'><span><FaGoogle /></span></button>
+                        <button className='mr-3'><span><FaLinkedin /></span></button>
+                    </div>
                     <p className='text-center'>Already Have an Accound?<Link className='text-orange-600 font-bold' to='/login'>Login</Link> </p>
                 </div>
             </div>

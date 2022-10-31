@@ -1,9 +1,24 @@
-import React from 'react';
+import { React, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import img from '../../assets/images/login/login.svg'
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 const Login = () => {
+    const { signInEmail } = useContext(AuthContext)
     const handleLogin = (event) => {
         event.preventDefault()
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password)
+        signInEmail(email, password)
+            .then(result => {
+                const user = result.user;
+                toast.success('Your Login Successfull')
+            })
+            .catch(err => {
+                toast.success('Your Password Worng')
+            })
     }
     return (
         <div className="hero w-full my-20">
@@ -24,7 +39,7 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" name='email' placeholder="password" className="input input-bordered" required />
+                            <input type="text" name='password' placeholder="password" className="input input-bordered" required />
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
