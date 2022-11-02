@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 const Login = () => {
     const { signInEmail } = useContext(AuthContext)
     const handleLogin = (event) => {
@@ -49,6 +50,12 @@ const Login = () => {
 
                         </div>
                     </form>
+                    <p className='text-center'>Or SignUp With</p>
+                    <div className='d-flex text-center mt-3'>
+                        <button className='mr-3'><span><FaFacebook /></span></button>
+                        <button className='mr-3'><span><FaGoogle /></span></button>
+                        <button className='mr-3'><span><FaLinkedin /></span></button>
+                    </div>
                     <p className='text-center'>New to Genius Car?<Link className='text-orange-600 font-bold' to='/signUp'>Sign Up</Link> </p>
                 </div>
             </div>

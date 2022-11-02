@@ -53,7 +53,7 @@ const SignUp = () => {
                         </div>
                     </form>
                     <p className='text-center'>Or SignUp With</p>
-                    <div className='d-flex text-center'>
+                    <div className='d-flex text-center mt-3'>
                         <button className='mr-3'><span><FaFacebook /></span></button>
                         <button className='mr-3'><span><FaGoogle /></span></button>
                         <button className='mr-3'><span><FaLinkedin /></span></button>
