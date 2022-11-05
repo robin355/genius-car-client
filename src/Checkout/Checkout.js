@@ -35,6 +35,7 @@ const Checkout = () => {
             .then(data => {
                 if (data.acknowledged > 0) {
                     alert('Orders place successFully')
+                    form.reset()
                 }
             })
             .catch(error => console.log(error))
