@@ -1,11 +1,14 @@
 import { React, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { FaFacebook, FaGoogle, FaLinkedin } from "react-icons/fa";
 const Login = () => {
     const { signInEmail } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/';
     const handleLogin = (event) => {
         event.preventDefault()
         const form = event.target;
@@ -15,7 +18,24 @@ const Login = () => {
         signInEmail(email, password)
             .then(result => {
                 const user = result.user;
+                const currentUser = {
+                    email: user.email
+                }
                 toast.success('Your Login Successfull')
+                fetch(`http://localhost:5000/jwt`, {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(currentUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        localStorage.setItem('genius-token', data.token)
+                        navigate(from, { replace: true })
+                    })
+
+
             })
             .catch(err => {
                 toast.success('Your Password Worng')
@@ -40,9 +60,9 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="text" name='password' placeholder="password" className="input input-bordered" required />
+                            <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                <a href="/" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
                         <div className="form-control mt-6">
