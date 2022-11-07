@@ -23,7 +23,7 @@ const Checkout = () => {
             phone,
             massege
         }
-        fetch('http://localhost:5000/orders', {
+        fetch('https://genius-car-server-opal-five.vercel.app/orders', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

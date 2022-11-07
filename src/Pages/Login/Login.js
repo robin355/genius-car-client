@@ -22,7 +22,7 @@ const Login = () => {
                     email: user.email
                 }
                 toast.success('Your Login Successfull')
-                fetch(`http://localhost:5000/jwt`, {
+                fetch(`https://genius-car-server-opal-five.vercel.app/jwt`, {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
